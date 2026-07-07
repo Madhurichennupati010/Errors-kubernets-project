@@ -82,6 +82,4 @@ nginx
 
 ---
 
-## Screenshot
 
-Add screenshots here.
