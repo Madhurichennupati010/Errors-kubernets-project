@@ -107,9 +107,10 @@ nginx
 Answer:
 
 ErrImagePull indicates that Kubernetes tried to pull the image and the attempt failed.
+
 ImagePullBackOff means Kubernetes has recognized the repeated pull failures and is now backing off (waiting longer between retries) before attempting to pull the image again.
 
-This is one of the most common Kubernet error
+This is one of the most common Kubernetes error
 
 
 
