@@ -1,5 +1,21 @@
 # ErrImagePull / ImagePullBackOff
 
+
+What is ErrImagePull?
+
+ErrImagePull occurs when Kubernetes cannot pull the container image from the registry.
+
+Common reasons include:
+
+The image name is incorrect.
+The image tag doesn't exist.
+The registry requires authentication.
+There are network issues.
+
+For practice i have give nginx/madhu there no such image in the pulic repo
+
+The nginx image exists, but the tag madhu does not. Kubernetes will try to download it and fail.
+
 ## Objective
 
 Learn how Kubernetes behaves when an image cannot be downloaded.
@@ -48,6 +64,10 @@ ImagePullBackOff
 
 ---
 
+## Why does it change?
+ErrImagePull: Kubernetes makes the first attempt to pull the image and fails.
+ImagePullBackOff: Kubernetes keeps retrying but waits longer between attempts.
+
 ## Troubleshooting
 
 ```bash
@@ -81,5 +101,17 @@ nginx
 ```
 
 ---
+
+## What is the difference between ErrImagePull and ImagePullBackOff?
+
+Answer:
+
+ErrImagePull indicates that Kubernetes tried to pull the image and the attempt failed.
+ImagePullBackOff means Kubernetes has recognized the repeated pull failures and is now backing off (waiting longer between retries) before attempting to pull the image again.
+
+This is one of the most common Kubernet error
+
+
+
 
 
