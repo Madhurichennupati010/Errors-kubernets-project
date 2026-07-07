@@ -1,82 +1,131 @@
-# CrashLoopBackOff
+# Kubernetes CrashLoopBackOff Practice
+
+## Project Overview
+
+This project demonstrates how I intentionally created a Kubernetes Deployment with an incorrect configuration to generate a **CrashLoopBackOff** error. I then used Kubernetes troubleshooting commands to identify the root cause, fixed the YAML file, and verified that the pod was running successfully.
+
+---
 
 ## Objective
 
-Understand why a container repeatedly crashes and how to troubleshoot it.
+- Create a Deployment YAML file.
+- Trigger a CrashLoopBackOff error.
+- Troubleshoot the issue using Kubernetes commands.
+- Fix the YAML configuration.
+- Verify the application is running.
 
 ---
 
-## Problem
+## Files
 
-The container exits immediately with Exit Code 1.
-
----
-
-## YAML
-
-```yaml
-(Add your pod.yaml here)
+```
+CrashLoopBackOff/
+│
+├── README.md
+├── deployment.yaml
+└── screenshots/
 ```
 
 ---
 
-## Deploy
+## Steps Performed
+
+### 1. Created the Deployment YAML
+
+Created a Kubernetes Deployment with an incorrect configuration to simulate a CrashLoopBackOff scenario.
+
+---
+
+### 2. Applied the Deployment
 
 ```bash
-kubectl apply -f pod.yaml
+kubectl apply -f deployment.yaml
 ```
 
 ---
 
-## Verify
+### 3. Verified the Pod Status
 
 ```bash
 kubectl get pods
 ```
 
-Status
-
-```
-CrashLoopBackOff
-```
+Observed the pod entering the **CrashLoopBackOff** state.
 
 ---
 
-## Troubleshooting
+### 4. Investigated the Issue
+
+Checked detailed pod information.
 
 ```bash
-kubectl logs crashloop-demo
+kubectl describe pod <pod-name>
+```
 
-kubectl logs crashloop-demo --previous
+Viewed the application logs.
 
-kubectl describe pod crashloop-demo
+```bash
+kubectl logs <pod-name>
 ```
 
 ---
 
-## Root Cause
+### 5. Fixed the YAML Configuration
 
-The container command executes:
+Corrected the error in the `deployment.yaml` file and reapplied the deployment.
 
+```bash
+kubectl apply -f deployment.yaml
 ```
-echo Starting...
-exit 1
-```
-
-Since the main process exits with Exit Code 1, Kubernetes continuously restarts the container.
 
 ---
 
-## Resolution
+### 6. Verified the Fix
 
-Remove the custom command so the nginx container starts normally.
+Checked the pod status again.
+
+```bash
+kubectl get pods
+```
+
+The pod transitioned to the **Running** state successfully.
 
 ---
 
-## Screenshot
+## Commands Used
 
-Add screenshots from
+```bash
+kubectl apply -f deployment.yaml
 
+kubectl get pods
+
+kubectl describe pod <pod-name>
+
+kubectl logs <pod-name>
+
+kubectl apply -f deployment.yaml
+
+kubectl rollout restart deployment <deployment-name>
+
+kubectl get pods
 ```
-screenshots/crashloopbackoff/
-```
+
+---
+
+## Outcome
+
+- Successfully created a CrashLoopBackOff scenario.
+- Identified the root cause using `kubectl describe` and `kubectl logs`.
+- Corrected the Deployment YAML.
+- Successfully restored the pod to the **Running** state.
+
+---
+
+---
+
+## Key Learnings
+
+- Learned how CrashLoopBackOff occurs.
+- Practiced Kubernetes troubleshooting commands.
+- Understood how to debug pod failures using logs and events.
+- Gained hands-on experience fixing Deployment YAML files.
