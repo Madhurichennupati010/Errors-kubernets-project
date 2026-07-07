@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: errimagepull-demo
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx/madhu
